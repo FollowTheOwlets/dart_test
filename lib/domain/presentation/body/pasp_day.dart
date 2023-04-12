@@ -21,7 +21,11 @@ class RaspDay {
           child: Center(child: CircularProgressIndicator()),
         );
       }
-      return DayBlock().build(pairs[DAYS[day]]!.first.lessons, DAYS[day]);
+      if(week == 1){
+        return DayBlock().build(pairs[DAYS[day]]!.first.lessons, DAYS[day]);
+      }else{
+        return DayBlock().build(pairs[DAYS[day]]!.second.lessons, DAYS[day]);
+      }
     }
   }
 }

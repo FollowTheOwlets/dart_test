@@ -1,5 +1,3 @@
-
-
 import 'package:hive/hive.dart';
 
 part 'lesson.g.dart';
@@ -15,7 +13,9 @@ class Lesson {
   @HiveField(3)
   final bool be;
 
-  Lesson(
+  Lesson(this.teacher, this.name, this.room, this.be);
+
+  Lesson.create(
     this.teacher,
     this.name,
     this.room,
@@ -27,7 +27,7 @@ class Lesson {
         room = "",
         be = false;
 
-  bool isBe(){
+  bool isBe() {
     return be;
   }
 
@@ -35,5 +35,4 @@ class Lesson {
   String toString() {
     return "$teacher \n $name \n $room";
   }
-
 }
