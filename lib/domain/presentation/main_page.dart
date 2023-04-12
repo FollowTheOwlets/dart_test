@@ -22,8 +22,8 @@ enum Weeks { first, second }
 class _MainPage extends State<MainPage> {
   WeekRepository repo = RaspRepository();
   bool _search = false;
-  Days day = Days.mon;
-  Weeks week = Weeks.first;
+  Days day = Days.values[(DateTime.now().toLocal().weekday - 1).abs()];
+  Weeks week = Weeks.values[(DateTime.now().toLocal().day / 7 - 1).abs().toInt() % 2];
   Week? weekObject;
 
   @override
