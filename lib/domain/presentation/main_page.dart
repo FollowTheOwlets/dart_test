@@ -23,7 +23,8 @@ class _MainPage extends State<MainPage> {
   WeekRepository repo = RaspRepository();
   bool _search = false;
   Days day = Days.values[(DateTime.now().toLocal().weekday - 1).abs()];
-  Weeks week = Weeks.values[(DateTime.now().toLocal().day / 7 - 1).abs().toInt() % 2];
+  Weeks week =
+      Weeks.values[(DateTime.now().toLocal().day / 7 - 1).abs().toInt() % 2];
   Week? weekObject;
 
   @override
@@ -38,9 +39,14 @@ class _MainPage extends State<MainPage> {
                       _search = !_search;
                     })
                   },
-              _search)
-          .build(),
-      body: RaspBody().build(day, week, (i) {
+              (value) => {
+                    setState(() {
+                      repo.saveGroup(value);
+                    })
+                  },
+              _search,
+              repo.getGroup()).build(),
+      body: RaspBody().build(repo.getGroup(), day, week, (i) {
         setState(() {
           day = Days.values[i];
         });

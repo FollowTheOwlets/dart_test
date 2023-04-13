@@ -27,5 +27,6 @@ Future<void> main() async {
   Hive.registerAdapter(LessonAdapter());
 
   await Hive.openBox<Week>('box_for_weeks');
+  await Hive.openBox<String>('box_for_group');
   runApp(Application());
 }

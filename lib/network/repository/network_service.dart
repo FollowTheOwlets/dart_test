@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -15,20 +14,17 @@ class NetworkService {
   final WeekRepository repo = RaspRepository();
 
   Future<Week> getHttp() async {
-
-    final response = await _dio.get(UrlBuilder().setGroup("ПМИб-3").build(),
+    final response = await _dio.get(
+        UrlBuilder().setGroup(repo.getGroup() ?? "ПМИб-1").build(),
         options: Options(
           headers: {
-            "Content-Type":"application/json;charset=UTF-8",
-            "Charset":"utf-8"
+            "Content-Type": "application/json;charset=UTF-8",
+            "Charset": "utf-8"
           },
         ));
 
     Week week = WeekConverter.convert(
-        json.decode(
-            UTF8Converter.convert2(response.data)
-        )
-    );
+        json.decode(UTF8Converter.convert2(response.data)));
 
     repo.save(week);
 
